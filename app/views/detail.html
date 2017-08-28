@@ -1,0 +1,48 @@
+
+<div class="jumbotron">
+  <h1 id="todo-header">
+    <span ng-bind="::vm.todo.text" ng-class="{completed: vm.todo.completed}"></span>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form name="todoForm">
+      <div class="form-group">
+        <label for="todoText">Todo</label>
+        <input type="text" class="form-control" id="todoText" name="todoText" ng-model="vm.todo.text" placeholder="Something I need to do..." />
+      </div>
+      <div class="form-group">
+        <label for="todoDescription">Description</label>
+        <textarea class="form-control" id="todoDescription" name="todoDescription" ng-model="vm.todo.description" placeholder="Details about what I need to do..." />
+      </div>
+      <div class="btn-group pull-right" role="group" aria-label="...">
+        <button class="btn btn-primary" ng-click="vm.todoSave()" ng-disabled="!todoForm.$dirty"><span class="glyphicon glyphicon-floppy-disk"></span> SAVE</button>
+        <button class="btn btn-default" ng-click="vm.todoToggle()"><span class="glyphicon glyphicon-ok"></span> {{vm.todo.completed ? 'UNCOMPLETE' : 'COMPLETE'}}</button>
+        <button class="btn btn-danger" ng-click="vm.todoDelete()"><span class="glyphicon glyphicon-trash"></span> DELETE</button>
+      </div>
+      <button class="btn btn-default" ng-click="vm.todoList()"><span class="glyphicon glyphicon-list-alt"></span> BACK</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal fade" id="cautionModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Caution</h4>
+      </div>
+      <div class="modal-body">
+        <p>You have unsaved changes.</p>
+        <p>Do you wish to save then before continuing?</p>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group pull-right" role="group" aria-label="...">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="vm.todoToggle(true)"><span class="glyphicon glyphicon-floppy-disk"></span> SAVE & {{vm.todo.completed ? 'UNCOMPLETE' : 'COMPLETE'}}</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.todoToggle(false)"><span class="glyphicon" ng-class="vm.todo.completed ? 'glyphicon-remove' : 'glyphicon-ok'"></span> {{vm.todo.completed ? 'UNCOMPLETE' : 'COMPLETE'}}</button>
+        </div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
